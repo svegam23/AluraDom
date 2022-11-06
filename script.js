@@ -24,7 +24,9 @@ btn.addEventListener("click", function(evento){
  * IIFE: Immediately Invoked Function Expression
  * Esto se hace para que las funciones sea de uso local y no pueda ser accesible de formal global
  */
-(() => {
+
+import checkComplete from "./components/checkComplete.js";
+import deleteIcon from "./components/deleteIcon.js";
 
 const btn = document.querySelector("[data-form-btn]")
 
@@ -57,41 +59,15 @@ const createTask= (evento) =>{
     //se agrega titleTask a taskContent
     taskContent.appendChild(titleTask);
 
-    //backticks = ``
-    const content = `
-  <i class="fas fa-trash-alt trashIcon icon"></i>`;
     //task.innerHTML = content;
 
     //se agrega todo el contenido al <li> desde el <div>
     task.appendChild(taskContent);
+//se llama la función deleteIcon
+    task.appendChild(deleteIcon());
     //Se agrega el hijo task(<li>) al padre list(<ul>)
     list.appendChild(task);
 }
 
-console.log(btn)
 btn.addEventListener("click", createTask);
 
-/**
- * Función para crear el elemento <i>
- */
-const checkComplete = () => {
-    //se crea la etiqueta <i> 
-    const i = document.createElement("i");
-    //se le agregan las clases que pertenecen a la etiqueta <i>
-    i.classList.add("far", "fa-check-square", "icon");
-    i.addEventListener("click", completeTask);
-    return i;
-}
-
-//función que sirve para marcar el check cuando se da click
-const completeTask = (event) => {
-    const element =  event.target;
-    //para agregar clases se utiliza 'add'
-    //para eliminarlas 'remove'
-    //para verificar si exiten o no se usa 'toggle' que a su vez sirve como: 'add' y 'remove'
-    element.classList.toggle("fas");
-    element.classList.toggle("completeIcon")
-    element.classList.toggle("far");
-};
-
-})();
